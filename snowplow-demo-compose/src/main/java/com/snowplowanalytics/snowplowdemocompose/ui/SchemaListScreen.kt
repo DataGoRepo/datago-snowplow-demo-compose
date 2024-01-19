@@ -71,10 +71,8 @@ fun SchemaCard(
             verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(modifier = Modifier.fillMaxWidth(0.9F)) {
-            ListSchemaProperty(title = "Id", data = caseId.toString())
             ListSchemaProperty(title = "Case", data = caseName)
             ListSchemaProperty(title = "Description", data = caseDescription)
-//            ListSchemaProperty(title = "Version", data = schema.version)
         }
         Column {
             Icon(

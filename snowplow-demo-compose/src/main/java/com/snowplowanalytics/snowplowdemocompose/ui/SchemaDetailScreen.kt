@@ -102,13 +102,7 @@ fun sendHit(caseId: Int, updateGlobalContext: Boolean = false) {
         val userContext = Tracking.updateUserContext()
         Tracking.updateGlobalContext(tag,userContext)
     }
-
-    if (caseId == 1){
-        Tracking.sendEvent(SelfDescribingJson(schema, data))
-    }
-    if (caseId == 2){
-        Tracking.sendEvent(SelfDescribingJson(schema, data))
-    }
+    Tracking.sendEvent(SelfDescribingJson(schema, data))
 }
 @Composable
 fun DetailsSchemaProperty(title: String, data: String) {

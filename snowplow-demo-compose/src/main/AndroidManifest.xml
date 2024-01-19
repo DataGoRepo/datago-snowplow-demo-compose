@@ -23,7 +23,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <data android:scheme="https" android:host="datago.ru" />
+                <data android:scheme="https" android:host="datago.ru" android:pathPrefix="/mobapp" />
             </intent-filter>
         </activity>
     </application>
