@@ -1,12 +1,25 @@
 package com.snowplowanalytics.snowplowdemocompose.data
 
+import com.snowplowanalytics.snowplow.payload.SelfDescribingJson
+
 data class SchemaDescription(
-    val description: String?,
+        val description: String?,
 )
 
-data class SchemaUrlParts(
-    val url: String,
-    val name: String,
-    val vendor: String,
-    val version: String,
+data class CaseDataJsonMap(
+        val id: Int,
+        val data: SelfDescribingJson
 )
+
+
+data class CasesSchema(
+        val data: List<CaseSchema>
+){
+    data class CaseSchema(
+            val id: Int = 0,
+            val case: String = "",
+            val description: String = "",
+            val dataPath: String = ""
+    )
+}
+

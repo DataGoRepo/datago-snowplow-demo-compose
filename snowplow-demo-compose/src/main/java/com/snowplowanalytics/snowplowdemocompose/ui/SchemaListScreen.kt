@@ -15,12 +15,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.snowplowanalytics.snowplowdemocompose.R
-import com.snowplowanalytics.snowplowdemocompose.data.SchemaUrlParts
+import com.snowplowanalytics.snowplowdemocompose.data.CasesSchema
 
 @Composable
 fun SchemaListScreen(
-    vm: SchemaListViewModel,
-    onSchemaClicked: (String) -> Unit = {}
+        vm: SchemaListViewModel,
+        onSchemaClicked: (CasesSchema.CaseSchema) -> Unit = {}
 ) {
     LaunchedEffect(Unit, block = {
         vm.getSchemaList()
@@ -28,18 +28,23 @@ fun SchemaListScreen(
 
     Scaffold(topBar = {
         TopAppBar (
-            title = {
-                Row {
-                    Text("Schemas")
-                }
-            })
+                title = {
+                    Row {
+                        Text("Cases")
+                    }
+                })
     }) { contentPadding ->
         Box(modifier = Modifier.padding(contentPadding)) {
             if (vm.errorMessage.isEmpty()) {
                 Column(modifier = Modifier.padding(contentPadding)) {
                     LazyColumn(modifier = Modifier.fillMaxHeight()) {
-                        items(vm.schemaPartsList) { schema ->
-                            SchemaCard(schema = schema, onClick = onSchemaClicked)
+                        items(vm.casesPartsList) { schema ->
+                            SchemaCard(
+                                    caseId = schema.id,
+                                    caseName=schema.case,
+                                    caseDescription=schema.description,
+                                    onClick = onSchemaClicked
+                            )
                         }
                     }
                 }
@@ -51,46 +56,52 @@ fun SchemaListScreen(
 }
 
 @Composable
-fun SchemaCard(schema: SchemaUrlParts, onClick: (String) -> Unit) {
+fun SchemaCard(
+        caseId: Int,
+        caseName: String,
+        caseDescription: String,
+        onClick: (CasesSchema.CaseSchema) -> Unit
+) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .clickable { onClick.invoke(schema.url) },
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        ) {
+            modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .clickable { onClick.invoke(CasesSchema.CaseSchema(caseId,caseName,caseDescription,"")) },
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+    ) {
         Column(modifier = Modifier.fillMaxWidth(0.9F)) {
-            ListSchemaProperty(title = "Name", data = schema.name)
-            ListSchemaProperty(title = "Vendor", data = schema.vendor)
-            ListSchemaProperty(title = "Version", data = schema.version)
+            ListSchemaProperty(title = "Id", data = caseId.toString())
+            ListSchemaProperty(title = "Case", data = caseName)
+            ListSchemaProperty(title = "Description", data = caseDescription)
+//            ListSchemaProperty(title = "Version", data = schema.version)
         }
         Column {
             Icon(
-                imageVector = Icons.Filled.ArrowForward,
-                contentDescription = stringResource(R.string.detail_button),
-                tint = MaterialTheme.colors.primary
+                    imageVector = Icons.Filled.ArrowForward,
+                    contentDescription = stringResource(R.string.detail_button),
+                    tint = MaterialTheme.colors.primary
             )
         }
         Spacer(modifier = Modifier.height(4.dp))
     }
     Divider(
-        color = MaterialTheme.colors.primary
+            color = MaterialTheme.colors.primary
     )
 }
 
 @Composable
 fun ListSchemaProperty(title: String, data: String) {
     Text(
-        text = title,
-        style = MaterialTheme.typography.subtitle1
+            text = title,
+            style = MaterialTheme.typography.subtitle1
     )
     Spacer(modifier = Modifier.height(4.dp))
     Text(
-        data,
-        style = MaterialTheme.typography.body1,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
+            data,
+            style = MaterialTheme.typography.body1,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
     )
     Spacer(modifier = Modifier.height(6.dp))
 }
