@@ -29,7 +29,7 @@ object Tracking {
     @Composable
     fun setup(namespace: String) : TrackerController {
         // Replace this collector endpoint with your own
-        val networkConfig = NetworkConfiguration("https://test.testing.stream.datago.ru/collector", HttpMethod.POST)
+        val networkConfig = NetworkConfiguration("https://stream.datago.ru/mobile", HttpMethod.POST)
 
         val trackerConfig = TrackerConfiguration("com.datago.datagoSnowplowAndroidComposeExample")
                 .logLevel(LogLevel.DEBUG)
