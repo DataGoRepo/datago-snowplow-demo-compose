@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity() {
 
     // Этот метод нужен для парсинга диплинков
     private fun parseIntent() {
+        if (!this::navController.isInitialized) {
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.host_activity) as NavHostFragment
+            navController = navHostFragment.navController
+        }
         val action: String? = intent?.action
         val data: Uri? = intent?.data
         val id = data?.getQueryParameter("id") ?: 1
