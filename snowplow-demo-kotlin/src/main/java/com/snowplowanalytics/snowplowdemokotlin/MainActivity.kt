@@ -12,53 +12,40 @@
  */
 package com.snowplowanalytics.snowplowdemokotlin
 
-import android.app.Activity
-import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.text.Html
-import android.text.method.LinkMovementMethod
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import com.snowplowanalytics.core.tracker.Logger
-import com.snowplowanalytics.snowplow.tracker.LogLevel
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.snowplowanalytics.snowplowdemokotlin.databinding.ActivityMainBinding
+import com.snowplowanalytics.snowplowdemokotlin.tracking.Tracking
 
-/**
- * Main Activity
- */
-class MainActivity : Activity() {
-    private var _liteBtn: Button? = null
-    private val repoUrl = "https://github.com/snowplow/snowplow-android-tracker"
-    private val snowplowDocsUrl = "https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/mobile-trackers"
-    private val techDocsUrl = "https://snowplow.github.io/snowplow-android-tracker"
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        parseIntent()
+        Tracking.setup("compose_demo", applicationContext)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.host_activity) as NavHostFragment
+        navController = navHostFragment.navController
+        Tracking.AutoTrackScreenView(navController = navController)
+    }
 
-        _liteBtn = findViewById<View>(R.id.btn_lite) as Button
-        _liteBtn?.setOnClickListener {
-            Logger.updateLogLevel(LogLevel.VERBOSE)
-            val intent = Intent(this@MainActivity, Demo::class.java)
-            startActivity(intent)
+    // Этот метод нужен для парсинга диплинков
+    private fun parseIntent() {
+        val action: String? = intent?.action
+        val data: Uri? = intent?.data
+        val id = data?.getQueryParameter("id") ?: 1
+        if (data.toString() == "https://datago.ru") {
+            navController.navigate(R.id.action_to_schemaDetailFragment, bundleOf("id" to id))
         }
-
-        // Setup Hyperlinks
-
-        val link1 = findViewById<View>(R.id.link_tech_docs) as TextView
-        val linkText1 = "- <a href='$techDocsUrl'>API Documentation</a>"
-        link1.text = Html.fromHtml(linkText1, 0)
-        link1.movementMethod = LinkMovementMethod.getInstance()
-
-        val link2 = findViewById<View>(R.id.link_docs) as TextView
-        val linkText2 = "- <a href='$snowplowDocsUrl'>Documentation</a>"
-        link2.text = Html.fromHtml(linkText2, 0)
-        link2.movementMethod = LinkMovementMethod.getInstance()
-
-        val link3 = findViewById<View>(R.id.link_repo) as TextView
-        val linkText3 = "- <a href='$repoUrl'>Github Repository</a>"
-        link3.text = Html.fromHtml(linkText3, 0)
-        link3.movementMethod = LinkMovementMethod.getInstance()
-
     }
 }

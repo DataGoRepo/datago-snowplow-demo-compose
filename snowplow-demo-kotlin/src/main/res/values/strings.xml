@@ -47,4 +47,11 @@
     <string name="running_2">Running . </string>
     <string name="running_3">Running  .</string>
     <string name="title_activity_media">Media playback</string>
+    <string name="id_text">Id</string>
+    <string name="case_text">Case</string>
+    <string name="description_text">Description</string>
+    <string name="case_name">Case Name</string>
+    <string name="json_schema">JSON Schema</string>
+    <string name="update_global_context">Update Global Context:</string>
+    <string name="send_event">Send Event</string>
 </resources>
