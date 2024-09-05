@@ -32,25 +32,27 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         parseIntent()
-        Tracking.setup("compose_demo", applicationContext)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.host_activity) as NavHostFragment
-        navController = navHostFragment.navController
-        Tracking.AutoTrackScreenView(navController = navController)
+        tracking()
     }
 
     // Этот метод нужен для парсинга диплинков
     private fun parseIntent() {
+        val action: String? = intent?.action
+        val data: Uri? = intent?.data
+        val id = data?.getQueryParameter("id") ?: 1
+        tracking()
+        if (data.toString() == "https://datago.ru") {
+            navController.navigate(R.id.action_to_schemaDetailFragment, bundleOf("id" to id))
+        }
+    }
+
+    private fun tracking() {
+        Tracking.setup("compose_demo", applicationContext)
         if (!this::navController.isInitialized) {
             val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.host_activity) as NavHostFragment
             navController = navHostFragment.navController
         }
-        val action: String? = intent?.action
-        val data: Uri? = intent?.data
-        val id = data?.getQueryParameter("id") ?: 1
-        if (data.toString() == "https://datago.ru") {
-            navController.navigate(R.id.action_to_schemaDetailFragment, bundleOf("id" to id))
-        }
+        Tracking.AutoTrackScreenView(navController = navController)
     }
 }
