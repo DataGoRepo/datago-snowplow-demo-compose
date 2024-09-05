@@ -16,7 +16,13 @@ class SchemaRepository(
         return mappedDataSource.getData(caseId)
     }
 
-    fun getSchemaById(caseId: Int): CasesSchema.CaseSchema {
-        return getSchemaList().data[caseId]
+    fun getSchemaById(caseId: Int): CasesSchema.CaseSchema? {
+        var schemaCase:CasesSchema.CaseSchema? = null
+        for(case in getSchemaList().data){
+            if(case.id == caseId) {
+                schemaCase = case
+            }
+        }
+        return schemaCase
     }
 }

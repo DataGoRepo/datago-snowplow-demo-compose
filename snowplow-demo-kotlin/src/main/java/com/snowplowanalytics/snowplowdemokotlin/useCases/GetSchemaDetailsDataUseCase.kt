@@ -14,16 +14,18 @@ class GetSchemaDetailsDataUseCase(private val schemaRepository: SchemaRepository
             val mappedData = schemaRepository.getMappedData(caseId)
             val schema = mappedData["schema"]
             val data = mappedData["data"]
-            emit(
-                Resource.Success(
-                    SchemaDetailState(
-                        jsonScheme = SelfDescribingJson(
-                            schema.toString(),
-                            data!!
-                        ), caseDescription = case.description, caseName = case.case
+            if (case != null) {
+                emit(
+                    Resource.Success(
+                        SchemaDetailState(
+                            jsonScheme = SelfDescribingJson(
+                                schema.toString(),
+                                data!!
+                            ), caseDescription = case.description, caseName = case.case
+                        )
                     )
                 )
-            )
+            }
         } catch (e: Exception) {
             emit(Resource.Error(e.localizedMessage ?: "Error while loading Schema cases"))
         }
