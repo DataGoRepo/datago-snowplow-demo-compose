@@ -27,9 +27,9 @@ object Tracking {
     fun setup(namespace: String, context: Context): TrackerController {
         // Replace this collector endpoint with your own
         val networkConfig =
-            NetworkConfiguration("https://test.testing.stream.datago.ru/collector", HttpMethod.POST)
+            NetworkConfiguration("https://stream.datago.ru/mobile", HttpMethod.POST)
 
-        val trackerConfig = TrackerConfiguration("com.datago.datagoSnowplowAndroidComposeExample")
+        val trackerConfig = TrackerConfiguration("com.datago.datagoSnowplowAndroidKotlinExample")
             .logLevel(LogLevel.DEBUG)
             .base64encoding(false)
             .devicePlatform(DevicePlatform.Mobile)
