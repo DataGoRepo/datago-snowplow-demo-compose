@@ -165,7 +165,7 @@ object Tracking {
 
     fun AutoTrackScreenView(navController: NavController) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            Snowplow.defaultTracker?.track(ScreenView(destination.route ?: "null"))
+            Snowplow.defaultTracker?.track(ScreenView((destination.label ?: "null").toString()))
         }
     }
 

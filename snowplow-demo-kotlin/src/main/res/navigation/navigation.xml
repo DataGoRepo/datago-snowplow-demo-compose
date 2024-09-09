@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/schemaListFragment"
         android:name="com.snowplowanalytics.snowplowdemokotlin.presentation.schemaListFragment.SchemaListFragment"
-        android:label="fragment_schema_list"
+        android:label="schema_list"
         tools:layout="@layout/fragment_schema_list">
         <action
             android:id="@+id/action_to_schemaDetailFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/schemaDetailFragment"
         android:name="com.snowplowanalytics.snowplowdemokotlin.presentation.schemaDetailFragment.SchemaDetailFragment"
-        android:label="fragment_schema_detail"
+        android:label="schema_detail"
         tools:layout="@layout/fragment_schema_detail">
         <action
             android:id="@+id/action_schemaDetailFragment_pop"
