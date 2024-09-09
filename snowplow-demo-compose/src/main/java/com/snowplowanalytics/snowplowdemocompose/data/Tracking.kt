@@ -57,7 +57,8 @@ object Tracking {
         )
 
         val subjectConfig = SubjectConfiguration()
-                .domainUserId("%UserId%")
+                .domainUserId("%DomainUserId%")
+                .userId("%DomainUserId%")
 
         val userContext = GlobalContext(
                 mutableListOf(
