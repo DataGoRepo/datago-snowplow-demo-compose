@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.snowplowanalytics.snowplowdemokotlin'
-    compileSdkVersion 34
 
     defaultConfig {
         applicationId 'com.snowplowanalytics.snowplowdemokotlin'
         minSdkVersion 24
         targetSdkVersion 34
+        compileSdk 34
         versionCode 1
         versionName '1.0'
 
@@ -40,8 +40,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':snowplow-android-tracker')
+    implementation 'com.snowplowanalytics:snowplow-android-tracker:6.+'
     implementation 'androidx.preference:preference:1.2.1'
     implementation 'androidx.browser:browser:1.5.0'
     implementation 'com.google.android.gms:play-services-appset:16.0.2'

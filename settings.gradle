@@ -1,6 +1,3 @@
-include ':snowplow-tracker'
 include ':snowplow-demo-java'
 include ':snowplow-demo-kotlin'
 include ':snowplow-demo-compose'
-
-project(":snowplow-tracker").name = "snowplow-android-tracker"

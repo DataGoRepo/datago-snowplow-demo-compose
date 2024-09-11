@@ -177,8 +177,10 @@ object Tracking {
                                 entities: List<SelfDescribingJson>? = null,
     ) {
         LaunchedEffect(Unit, block = {
-            val event = ScreenView(screenName).entities(entities)
-            Snowplow.defaultTracker?.track(event)
+            val event = entities?.let { ScreenView(screenName).entities(it) }
+            if (event != null) {
+                Snowplow.defaultTracker?.track(event)
+            }
         })
     }
     fun sendEvent(data: SelfDescribingJson) {
