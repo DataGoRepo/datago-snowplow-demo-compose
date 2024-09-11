@@ -47,7 +47,7 @@ android {
 
 dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$project.archLifecycleVersion"
-    implementation 'com.snowplowanalytics:snowplow-android-tracker:6.+'
+    implementation 'com.snowplowanalytics:snowplow-android-tracker:6.0.5'
     implementation 'androidx.browser:browser:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'

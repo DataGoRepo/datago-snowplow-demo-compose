@@ -58,7 +58,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.1'
     implementation 'androidx.browser:browser:1.5.0'
 
-    implementation 'com.snowplowanalytics:snowplow-android-tracker:6.+'
+    implementation 'com.snowplowanalytics:snowplow-android-tracker:6.0.5'
     
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.0.0"
