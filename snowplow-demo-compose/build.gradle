@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.snowplowanalytics.snowplowdemocompose'
-    compileSdkVersion 33
 
     defaultConfig {
         applicationId 'com.snowplowanalytics.snowplowdemocompose'
         minSdkVersion 26
-        targetSdkVersion 33
+        targetSdkVersion 34
+        compileSdk 34
         versionCode 1
         versionName '1.0'
 
@@ -57,9 +57,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.preference:preference:1.2.1'
     implementation 'androidx.browser:browser:1.5.0'
-    
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':snowplow-android-tracker')
+
+    implementation 'com.snowplowanalytics:snowplow-android-tracker:6.0.5'
     
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.0.0"

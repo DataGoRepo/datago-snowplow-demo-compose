@@ -5,13 +5,14 @@ project.ext {
 }
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion '30.0.3'
+    namespace="com.snowplowanalytics.snowplowtrackerdemojava"
 
     defaultConfig {
         applicationId "com.snowplowanalytics.snowplowtrackerdemojava"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 34
+        compileSdk 34
+        buildToolsVersion='34.0.0'
         versionCode 3
         versionName "0.3.0"
         signingConfig signingConfigs.debug
@@ -46,12 +47,11 @@ android {
 
 dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$project.archLifecycleVersion"
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':snowplow-android-tracker')
+    implementation 'com.snowplowanalytics:snowplow-android-tracker:6.0.5'
     implementation 'androidx.browser:browser:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.google.code.gson:gson:2.9.0'
 
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.9'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.2'
 }

@@ -295,7 +295,7 @@ public class Demo extends Activity implements LoggerDelegate {
         NetworkConfiguration networkConfiguration = new NetworkConfiguration(uri, method);
         EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
                 .requestCallback(getRequestCallback())
-                .bufferOption(BufferOption.DefaultGroup)
+                .bufferOption(BufferOption.SmallGroup)
                 .threadPoolSize(20)
                 .emitRange(500)
                 .byteLimitPost(52000);
